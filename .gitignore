@@ -1,0 +1,8 @@
+# Rust
+/target/
+Cargo.lock
+**/*.rs.bk
+*.dll
+
+# VSCode
+.vscode/

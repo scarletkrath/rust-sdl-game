@@ -1,0 +1,12 @@
+[package]
+name = "iwbts"
+version = "0.1.0"
+authors = ["Suleyth <suleyth@protonmail.com>"]
+edition = "2018"
+
+[dependencies]
+
+[dependencies.sdl2]
+    version = "0.32"
+    default-features = false
+    features = ["ttf","image","mixer"]
