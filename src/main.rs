@@ -15,25 +15,20 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+use std::error::Error;
 
 use game::Game;
 
 mod game;
 mod utils;
-mod player;
 mod resources;
 
-pub fn main() {
+pub fn main() -> Result<(), Box<dyn Error>> {
     println!();
-    let game = Game::new("I Wanna Be The Suleyth", 768, 432, 60);
 
-    let mut game = match game {
-        Ok(game) => game,
-        Err(e) => { panic!("Failed to construct game: {:?}", e) },
-    };
+    let mut game = Game::new("I Wanna Be The Suleyth", 768, 432, 60)?;
+    
+    game.run()?;
 
-    match game.run() {
-        Ok(game_result) => game_result,
-        Err(e) => { panic!("An error in the game loop has ocurred: {:?}", e) },
-    };
+    Ok(())
 }

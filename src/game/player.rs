@@ -16,8 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 use std::rc::Rc;
+use std::error::Error;
 
 use sdl2::rect::Rect;
 use sdl2::render::{Texture, Canvas};
@@ -48,14 +48,11 @@ impl<'l> Player<'l> {
         self.pos += self.vel;
     }
 
-    pub fn draw(&self, canvas: &mut Canvas<Window>) {
-        let result = canvas.copy(&self.texture, None, 
+    pub fn draw(&self, canvas: &mut Canvas<Window>) -> Result<(), Box<dyn Error>> {
+        canvas.copy(&self.texture, None, 
             Rect::new(self.pos.x as i32, self.pos.y as i32, 
-                      self.rect.width(), self.rect.height()));
+                      self.rect.width(), self.rect.height()))?;
 
-        match result {
-            Ok(result) => result,
-            Err(e) => panic!("Error copying to canvas: {:?}", e)
-        }
+        Ok(())
     }
 }
